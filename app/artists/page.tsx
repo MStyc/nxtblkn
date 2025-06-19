@@ -1,0 +1,201 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Play, ExternalLink, Instagram, Youtube } from "lucide-react"
+import Image from "next/image"
+
+export default function ArtistsPage() {
+  const [selectedGenre, setSelectedGenre] = useState("All")
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in")
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    const elements = document.querySelectorAll(".fade-in")
+    elements.forEach((el) => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
+  const genres = ["All", "Folk Fusion", "Electronic", "Hip-Hop", "Pop", "Traditional"]
+
+  const artists = [
+    {
+      name: "Marko Petrović",
+      genre: "Folk Fusion",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Blending traditional Serbian folk with modern electronic elements",
+      streams: "2.5M",
+      followers: "45K",
+    },
+    {
+      name: "Ana Stojanović",
+      genre: "Electronic",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Electronic music producer pushing Balkan sounds into the future",
+      streams: "1.8M",
+      followers: "32K",
+    },
+    {
+      name: "Nikola Jovanović",
+      genre: "Hip-Hop",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Rap artist bringing Balkan stories to global hip-hop scene",
+      streams: "3.2M",
+      followers: "67K",
+    },
+    {
+      name: "Milica Radić",
+      genre: "Pop",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Pop sensation with roots in traditional Balkan melodies",
+      streams: "4.1M",
+      followers: "89K",
+    },
+    {
+      name: "Stefan Milosević",
+      genre: "Traditional",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Preserving and modernizing ancient Balkan musical traditions",
+      streams: "1.2M",
+      followers: "28K",
+    },
+    {
+      name: "Jovana Nikolić",
+      genre: "Folk Fusion",
+      image: "/placeholder.svg?height=300&width=300",
+      bio: "Innovative fusion of folk instruments with contemporary production",
+      streams: "2.9M",
+      followers: "54K",
+    },
+  ]
+
+  const filteredArtists = selectedGenre === "All" ? artists : artists.filter((artist) => artist.genre === selectedGenre)
+
+  return (
+    <div className="min-h-screen pt-20 animated-bg">
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 fade-in opacity-0 translate-y-10 transition-all duration-1000">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">Our Artists</h1>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Meet the talented artists who are shaping the future of Balkan music
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Genre Filter */}
+      <section className="py-10 px-4">
+        <div className="container mx-auto">
+          <div className="flex flex-wrap justify-center gap-4 mb-16 fade-in opacity-0 translate-y-10 transition-all duration-1000">
+            {genres.map((genre) => (
+              <Button
+                key={genre}
+                variant={selectedGenre === genre ? "default" : "outline"}
+                onClick={() => setSelectedGenre(genre)}
+                className={
+                  selectedGenre === genre
+                    ? "bg-white text-black"
+                    : "border-white text-white hover:bg-white hover:text-black"
+                }
+              >
+                {genre}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Artists Grid */}
+      <section className="py-10 px-4">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredArtists.map((artist, index) => (
+              <Card
+                key={index}
+                className="fade-in opacity-0 translate-y-10 transition-all duration-1000 glass-effect border-white/20 overflow-hidden hover:neon-glow group"
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                <div className="relative overflow-hidden">
+                  <Image
+                    src={artist.image || "/placeholder.svg"}
+                    alt={artist.name}
+                    width={300}
+                    height={300}
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <Button size="sm" className="bg-white text-black hover:bg-gray-200">
+                      <Play size={16} className="mr-2" />
+                      Listen
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-bold">{artist.name}</h3>
+                    <span className="text-sm text-gray-400 bg-gray-800 px-2 py-1 rounded">{artist.genre}</span>
+                  </div>
+
+                  <p className="text-gray-400 mb-4">{artist.bio}</p>
+
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="text-sm">
+                      <div className="text-white font-semibold">{artist.streams} streams</div>
+                      <div className="text-gray-400">{artist.followers} followers</div>
+                    </div>
+
+                    <div className="flex space-x-2">
+                      <Button size="sm" variant="ghost" className="p-2 text-white hover:bg-white/10">
+                        <Instagram size={16} />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="p-2 text-white hover:bg-white/10">
+                        <Youtube size={16} />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="p-2 text-white hover:bg-white/10">
+                        <ExternalLink size={16} />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 bg-gradient-to-r from-black to-gray-900">
+        <div className="container mx-auto text-center">
+          <div className="fade-in opacity-0 translate-y-10 transition-all duration-1000">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Want to Join Our Roster?</h2>
+            <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+              We're always looking for talented artists who share our vision for the future of Balkan music.
+            </p>
+
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-black hover:bg-gray-200 min-w-[200px] !border-4 !border-white !rounded-lg shadow-lg"
+            >
+              <a href="/join">Submit Your Demo</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
