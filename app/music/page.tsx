@@ -46,7 +46,7 @@ const tracks: Track[] = [
     genre: "Folk Fusion",
     releaseDate: "2024-01-15",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    src: "/music/nocni-raj.mp3",
+    audioUrl: "/music/nocni-raj.mp3",
     plays: "2.5M",
     likes: "45K",
   },
