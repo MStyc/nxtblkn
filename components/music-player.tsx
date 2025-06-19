@@ -18,12 +18,12 @@ interface Track {
 const tracks: Track[] = [
   {
     id: 1,
-    title: "Balkan Nights",
-    artist: "Marko Petrović",
-    duration: "3:45",
+    title: "Noćni Raj",
+    artist: "Crni Stojke",
+    duration: "3:10",
     genre: "Folk Fusion",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "#",
+    audioUrl: "/test/Noćni Rajj.mp3",
   },
   {
     id: 2,
