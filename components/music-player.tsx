@@ -23,7 +23,7 @@ const tracks: Track[] = [
     duration: "3:10",
     genre: "Folk Fusion",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "music/Noćni Rajj.mp3",
+    audioUrl: "/music/Noćnirajj.mp3",
   },
   {
     id: 2,
