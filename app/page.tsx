@@ -1,4 +1,3 @@
-{/* Music Listening Section */}
 "use client"
 
 import { Card } from "@/components/ui/card"
