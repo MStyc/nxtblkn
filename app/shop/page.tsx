@@ -12,7 +12,7 @@ const products = [
     name: "NXT Balkan X Off White T-Shirt",
     description: "High quality merchandise designed for fans of Balkan beats and style.",
     price: "€49.99",
-    image: "https://media.discordapp.net/attachments/1329893059147862109/1386035625760788685/716AC4D5-AE2F-48E8-9612-78D3CF0F5241.png?ex=68583dc4&is=6856ec44&hm=46baa76b084d2e0a32cdb588e8707af1b2e0f393b5310169ef8c6bdf9f4a4915&=&format=webp&quality=lossless&width=781&height=781",
+    image: "https://media.discordapp.net/attachments/1329893059147862109/1386037487587168316/IMG_5560.png?ex=68583f80&is=6856ee00&hm=6c379ed8f16947ba8124c021b6a3407cd22f7683119d9d1b8d429b6373b53e5d&=&format=webp&quality=lossless&width=716&height=781",
     info: "Size: M, L, XL\nMaterial: 100% Cotton\nLimited edition print",
   },
   {
@@ -20,7 +20,7 @@ const products = [
     name: "NXT Balkan T-Shirt",
     description: "Exclusive design inspired by Balkan culture.",
     price: "€19.99",
-    image: "https://media.discordapp.net/attachments/1329893059147862109/1386035625446084660/761C6F02-65DA-4F49-BE05-3301FBBF49BE.png?ex=68583dc4&is=6856ec44&hm=05aa76851c216aa1cf9c77e4fcaaa89f14e4d600378528d5b3a9b203a8143d94&=&format=webp&quality=lossless&width=520&height=781",
+    image: "https://media.discordapp.net/attachments/1329893059147862109/1386037487050162176/IMG_5561.png?ex=68583f80&is=6856ee00&hm=61aa1f99d940356b56b36bb67f573f20965feb58b12aa3197073c1641094c820&=&format=webp&quality=lossless&width=616&height=781",
     info: "Size: S, M, L\nMaterial: Polyester blend\nUnisex style",
   },
   {
@@ -28,7 +28,7 @@ const products = [
     name: "NXT Balkan Hoodie",
     description: "Comfortable and stylish for everyday wear.",
     price: "€34.99",
-    image: "https://media.discordapp.net/attachments/1329893059147862109/1386036263479541941/CEE37965-F3DA-44C7-873F-DC644A6AF32C.png?ex=68583e5c&is=6856ecdc&hm=8ddd3d44ba7afbb137ad4f692a607b24992169d8bac74328d8b6f96f3cc79497&=&format=webp&quality=lossless&width=590&height=885",
+    image: "https://media.discordapp.net/attachments/1329893059147862109/1386037486656159794/IMG_5562.png?ex=68583f80&is=6856ee00&hm=6bdaa6777d036d920f58486dcafed43988e7ad430edfc3f6260049e008b362f6&=&format=webp&quality=lossless&width=685&height=780",
     info: "Size: M, L\nMaterial: Cotton mix\nAvailable in multiple colors",
   },
   // Add more products here...
