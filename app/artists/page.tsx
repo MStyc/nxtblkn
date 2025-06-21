@@ -27,12 +27,11 @@ export default function ArtistsPage() {
     return () => observer.disconnect()
   }, [])
 
-  const genres = ["All", "Folk Fusion", "Electronic", "Hip-Hop", "Pop", "Traditional"]
+  
 
   const artists = [
     {
       name: "Crni Stojke",
-      genre: "Pop",
       image: "https://media.discordapp.net/attachments/1329893059147862109/1384271802003357716/mascote2.png?ex=6857c1d4&is=68567054&hm=b5bc7aba02b164564d6b013ab4e24b2be4966b3dfa8c69d9657d5116e3571388&=&format=webp&quality=lossless&width=590&height=885",
       bio: "Blending traditional Serbian folk with modern electronic elements",
       streams: "No Data Yet",
@@ -40,43 +39,24 @@ export default function ArtistsPage() {
     },
     {
       name: "Coming Soon",
-      genre: "",
       image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-      bio: "/",
-      streams: "/",
-      followers: "/",
     },
     {
       name: "Coming Soon",
-      genre: "",
       image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-      bio: "/",
-      streams: "/",
-      followers: "/",
+      
     },
     {
       name: "Coming Soon",
-      genre: "",
       image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-      bio: "/",
-      streams: "/",
-      followers: "/",
     },
     {
       name: "Coming Soon",
-      genre: "",
       image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-      bio: "/",
-      streams: "/",
-      followers: "/",
     },
     {
       name: "Coming Soon",
-      genre: "",
       image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-      bio: "/",
-      streams: "/",
-      followers: "/",
     },
   ]
 
