@@ -200,26 +200,41 @@ export default function HomePage() {
               Meet some of the incredible talents shaping the future of Balkan music
             </p>
           </div>
+         <div className="grid md:grid-cols-3 gap-8">
+  {[
+    {
+      name: "Crni Stojke",
+      genre: "",
+      streams: "Not Yet",
+      image: "https://media.discordapp.net/attachments/1329893059147862109/1385981143601385623/image.jpg?ex=68580b06&is=6856b986&hm=4f7b227f2567bf8ef5b7fd04b1503e0d6742731792a48a70132f3b71c89268b2&=&format=webp&width=498&height=885", // tukaj dodaj pravi url slike
+    },
+  ].map((artist, index) => (
+    <Card
+      key={index}
+      className="fade-in glass-effect border-white/20 p-6 hover:neon-glow group cursor-pointer transition-all duration-300"
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+      <div className="aspect-square rounded-lg mb-4 overflow-hidden flex items-center justify-center bg-gray-800">
+        {artist.image ? (
+          <img
+            src={artist.image}
+            alt={artist.name}
+            className="object-cover w-full h-full"
+          />
+        ) : (
+          <Headphones size={48} className="text-gray-400" />
+        )}
+      </div>
+      <h3 className="text-xl font-bold text-white mb-2">{artist.name}</h3>
+      <p className="text-gray-400 mb-2">{artist.genre}</p>
+      <p className="text-sm text-gray-500">{artist.streams} streams</p>
+    </Card>
+  ))}
+</div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { name: "Marko Petrović", genre: "Folk Fusion", streams: "2.5M" },
-              { name: "Ana Stojanović", genre: "Electronic", streams: "1.8M" },
-              { name: "Nikola Jovanović", genre: "Hip-Hop", streams: "3.2M" },
-            ].map((artist, index) => (
-              <Card
-                key={index}
-                className="fade-in glass-effect border-white/20 p-6 hover:neon-glow group cursor-pointer transition-all duration-300"
-              >
-                <div className="aspect-square bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                  <Headphones size={48} className="text-gray-400" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{artist.name}</h3>
-                <p className="text-gray-400 mb-2">{artist.genre}</p>
-                <p className="text-sm text-gray-500">{artist.streams} streams</p>
-              </Card>
-            ))}
-          </div>
+          
+          
+  
 
           <div className="text-center mt-12 fade-in">
             <Button asChild size="lg" className="bg-white text-black hover:bg-gray-200 min-w-[200px]">
