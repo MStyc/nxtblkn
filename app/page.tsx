@@ -2,14 +2,24 @@
 
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, Play, Music, Users, Zap, Award, Globe, Headphones } from "lucide-react"
+import { ArrowRight, Play, Music, Users, Zap, Award, Globe, Headphones, Bell } from "lucide-react"
 import { HolographicCard } from "@/components/holographic-card"
 import { MusicPlayer } from "@/components/music-player"
 
+const notifications = [
+  "Check the new Devito album \"Nema Spavanja\"!",
+  "Explore exclusive merch drops – limited time only!",
+  "New artist signed: Mila Marković – hear her debut single!",
+  "🔥 Balkan Beats playlist updated – tune in now!",
+  "Submit your demo and be the next star of NXT Balkan!",
+]
+
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null)
+  const [currentNotification, setCurrentNotification] = useState(0)
+  const [showNotification, setShowNotification] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,8 +49,25 @@ export default function HomePage() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentNotification((prev) => (prev + 1) % notifications.length)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 10000) // show for 10s
+    }, 45000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <div className="animated-bg min-h-screen">
+      {/* Notification Banner */}
+      {showNotification && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[60] bg-white text-black px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 w-[90%] max-w-lg animate-fadeInUp border border-black/10">
+          <Bell className="text-black w-5 h-5" />
+          <span className="text-sm font-medium text-center w-full">{notifications[currentNotification]}</span>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
