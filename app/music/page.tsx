@@ -21,6 +21,7 @@ import { VoiceControl } from "@/components/voice-control"
 import { DynamicBackground } from "@/components/dynamic-background"
 import { GestureControls } from "@/components/gesture-controls"
 import { HolographicCard } from "@/components/holographic-card"
+import Head from "next/head"
 
 interface Track {
   id: number
@@ -129,44 +130,42 @@ export default function MusicPage() {
   
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  // Initialize audio element
+  // Inicializacija audio elementa
   useEffect(() => {
     setIsMobile(window.innerWidth < 768)
     const handleResize = () => setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', handleResize)
     
-    // Create audio element
+    // Ustvarimo audio element
     audioRef.current = new Audio()
     audioRef.current.volume = volume
     
-    // Set up event listeners
-    audioRef.current.addEventListener('timeupdate', updateTime)
-    audioRef.current.addEventListener('ended', handleTrackEnd)
-    audioRef.current.addEventListener('loadedmetadata', updateDuration)
-    audioRef.current.addEventListener('play', () => setIsPlaying(true))
-    audioRef.current.addEventListener('pause', () => setIsPlaying(false))
-    audioRef.current.addEventListener('error', handleAudioError)
-    audioRef.current.addEventListener('waiting', () => setIsLoading(true))
-    audioRef.current.addEventListener('canplay', () => setIsLoading(false))
+    // Nastavimo event listenerje
+    const audio = audioRef.current
+    audio.addEventListener('timeupdate', updateTime)
+    audio.addEventListener('ended', handleTrackEnd)
+    audio.addEventListener('loadedmetadata', updateDuration)
+    audio.addEventListener('play', () => setIsPlaying(true))
+    audio.addEventListener('pause', () => setIsPlaying(false))
+    audio.addEventListener('error', handleAudioError)
+    audio.addEventListener('waiting', () => setIsLoading(true))
+    audio.addEventListener('canplay', () => setIsLoading(false))
     
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.removeEventListener('timeupdate', updateTime)
-        audioRef.current.removeEventListener('ended', handleTrackEnd)
-        audioRef.current.removeEventListener('loadedmetadata', updateDuration)
-        audioRef.current.removeEventListener('play', () => setIsPlaying(true))
-        audioRef.current.removeEventListener('pause', () => setIsPlaying(false))
-        audioRef.current.removeEventListener('error', handleAudioError)
-        audioRef.current.removeEventListener('waiting', () => setIsLoading(true))
-        audioRef.current.removeEventListener('canplay', () => setIsLoading(false))
-        audioRef.current = null
-      }
+      audio.pause()
+      audio.removeEventListener('timeupdate', updateTime)
+      audio.removeEventListener('ended', handleTrackEnd)
+      audio.removeEventListener('loadedmetadata', updateDuration)
+      audio.removeEventListener('play', () => setIsPlaying(true))
+      audio.removeEventListener('pause', () => setIsPlaying(false))
+      audio.removeEventListener('error', handleAudioError)
+      audio.removeEventListener('waiting', () => setIsLoading(true))
+      audio.removeEventListener('canplay', () => setIsLoading(false))
       window.removeEventListener('resize', handleResize)
     }
   }, [])
 
-  // Load track when currentTrack changes
+  // Naložimo track ob spremembi currentTrack
   useEffect(() => {
     if (!audioRef.current) return
     
@@ -176,19 +175,19 @@ export default function MusicPage() {
     
     if (isPlaying) {
       audioRef.current.play().catch(e => {
-        console.error("Playback failed:", e)
+        console.error("Napaka pri predvajanju:", e)
         setIsPlaying(false)
       })
     }
   }, [currentTrack])
 
-  // Handle play/pause
+  // Obdelava play/pause
   useEffect(() => {
     if (!audioRef.current) return
     
     if (isPlaying) {
       audioRef.current.play().catch(e => {
-        console.error("Playback failed:", e)
+        console.error("Napaka pri predvajanju:", e)
         setIsPlaying(false)
       })
     } else {
@@ -196,7 +195,7 @@ export default function MusicPage() {
     }
   }, [isPlaying])
 
-  // Handle volume change
+  // Obdelava glasnosti
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume
@@ -220,7 +219,7 @@ export default function MusicPage() {
   }
 
   const handleAudioError = () => {
-    console.error("Error loading audio")
+    console.error("Napaka pri nalaganju glasbe")
     setIsPlaying(false)
     setIsLoading(false)
   }
@@ -242,13 +241,13 @@ export default function MusicPage() {
 
   const handlePrevious = () => {
     if (currentTime > 3) {
-      // If more than 3 seconds into song, restart current track
+      // Če smo več kot 3 sekunde v pesmi, ponastavimo trenutno pesem
       if (audioRef.current) {
         audioRef.current.currentTime = 0
         setCurrentTime(0)
       }
     } else {
-      // Otherwise go to previous track
+      // Drugače gremo na prejšnjo pesem
       setCurrentTrack((prev) => (prev - 1 + tracks.length) % tracks.length)
       setCurrentTime(0)
     }
@@ -275,6 +274,30 @@ export default function MusicPage() {
   const filteredTracks = selectedGenre === "All" ? tracks : tracks.filter((track) => track.genre === selectedGenre)
 
   const track = tracks[currentTrack]
+
+  return (
+    <>
+      <Head>
+        <title>NXT Balkan Music | {track.title} - {track.artist}</title>
+        <meta name="description" content="Poslušajte najboljšo balkansko glasbo" />
+      </Head>
+
+      {/* Dodajte header z naslovom */}
+      <header className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-50 border-b border-white/10">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-white">NXT Balkan Music</h1>
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-gray-300 hidden md:block">
+              Now Playing: {track.title} - {track.artist}
+            </span>
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+              <Heart size={16} />
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      const track = tracks[currentTrack]
 
   if (isMobile) {
     return (
@@ -850,6 +873,9 @@ export default function MusicPage() {
           </div>
         </div>
       </section>
-    </div>
+    </div>   
+      {/* Na dnu dodajte audio element za Safari podporo */}
+      <audio ref={audioRef} preload="auto" />
+    </>
   )
 }
