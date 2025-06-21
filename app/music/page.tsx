@@ -209,7 +209,7 @@ export default function MusicPage() {
 
         {/* Mobile Header */}
       <div className="pt-24 px-4 pb-4">
-    <h1 className="text-3xl font-bold text-white">Listen to Our Music</h1>
+         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">Listen to Our Music</h1>
     </div>
 
 
