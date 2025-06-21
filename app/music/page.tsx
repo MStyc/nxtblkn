@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Play,
@@ -21,7 +21,6 @@ import { VoiceControl } from "@/components/voice-control"
 import { DynamicBackground } from "@/components/dynamic-background"
 import { GestureControls } from "@/components/gesture-controls"
 import { HolographicCard } from "@/components/holographic-card"
-import Head from "next/head"
 
 interface Track {
   id: number
@@ -60,7 +59,7 @@ const tracks: Track[] = [
     genre: "Folk Fusion",
     releaseDate: "2024-01-10",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/balkan-nights.mp3",
+    audioUrl: "/music/nocni-raj.mp3",
     plays: "1.8M",
     likes: "32K",
   },
@@ -73,7 +72,7 @@ const tracks: Track[] = [
     genre: "Electronic",
     releaseDate: "2024-01-05",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/electronic-folklore.mp3",
+    audioUrl: "/music/nocni-raj.mp3",
     plays: "3.2M",
     likes: "67K",
   },
@@ -86,7 +85,7 @@ const tracks: Track[] = [
     genre: "Hip-Hop",
     releaseDate: "2023-12-20",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/urban-balkan.mp3",
+    audioUrl: "/music/nocni-raj.mp3",
     plays: "4.1M",
     likes: "89K",
   },
@@ -99,7 +98,7 @@ const tracks: Track[] = [
     genre: "Traditional",
     releaseDate: "2023-12-15",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/mountain-echoes.mp3",
+    audioUrl: "/music/nocni-raj.mp3",
     plays: "1.2M",
     likes: "28K",
   },
@@ -112,7 +111,7 @@ const tracks: Track[] = [
     genre: "Folk Fusion",
     releaseDate: "2023-12-10",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/fusion-dreams.mp3",
+    audioUrl: "/music/nocni-raj.mp3",
     plays: "2.9M",
     likes: "54K",
   },
@@ -122,111 +121,59 @@ export default function MusicPage() {
   const [currentTrack, setCurrentTrack] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [volume, setVolume] = useState(0.75)
+  const [duration, setDuration] = useState(225) // 3:45 in seconds
+  const [volume, setVolume] = useState(75)
   const [selectedGenre, setSelectedGenre] = useState("All")
   const [isMobile, setIsMobile] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  
-  const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  // Inicializacija audio elementa
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    window.addEventListener('resize', handleResize)
-    
-    // Ustvarimo audio element
-    audioRef.current = new Audio()
-    audioRef.current.volume = volume
-    
-    // Nastavimo event listenerje
-    const audio = audioRef.current
-    audio.addEventListener('timeupdate', updateTime)
-    audio.addEventListener('ended', handleTrackEnd)
-    audio.addEventListener('loadedmetadata', updateDuration)
-    audio.addEventListener('play', () => setIsPlaying(true))
-    audio.addEventListener('pause', () => setIsPlaying(false))
-    audio.addEventListener('error', handleAudioError)
-    audio.addEventListener('waiting', () => setIsLoading(true))
-    audio.addEventListener('canplay', () => setIsLoading(false))
-    
-    return () => {
-      audio.pause()
-      audio.removeEventListener('timeupdate', updateTime)
-      audio.removeEventListener('ended', handleTrackEnd)
-      audio.removeEventListener('loadedmetadata', updateDuration)
-      audio.removeEventListener('play', () => setIsPlaying(true))
-      audio.removeEventListener('pause', () => setIsPlaying(false))
-      audio.removeEventListener('error', handleAudioError)
-      audio.removeEventListener('waiting', () => setIsLoading(true))
-      audio.removeEventListener('canplay', () => setIsLoading(false))
-      window.removeEventListener('resize', handleResize)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
     }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  // Naložimo track ob spremembi currentTrack
   useEffect(() => {
-    if (!audioRef.current) return
-    
-    setIsLoading(true)
-    audioRef.current.src = tracks[currentTrack].audioUrl
-    audioRef.current.load()
-    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in")
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    const elements = document.querySelectorAll(".fade-in")
+    elements.forEach((el) => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Simulate time progress
+  useEffect(() => {
+    let interval: NodeJS.Timeout
     if (isPlaying) {
-      audioRef.current.play().catch(e => {
-        console.error("Napaka pri predvajanju:", e)
-        setIsPlaying(false)
-      })
+      interval = setInterval(() => {
+        setCurrentTime((prev) => {
+          if (prev >= duration) {
+            setIsPlaying(false)
+            return 0
+          }
+          return prev + 1
+        })
+      }, 1000)
     }
-  }, [currentTrack])
-
-  // Obdelava play/pause
-  useEffect(() => {
-    if (!audioRef.current) return
-    
-    if (isPlaying) {
-      audioRef.current.play().catch(e => {
-        console.error("Napaka pri predvajanju:", e)
-        setIsPlaying(false)
-      })
-    } else {
-      audioRef.current.pause()
-    }
-  }, [isPlaying])
-
-  // Obdelava glasnosti
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume
-    }
-  }, [volume])
-
-  const updateTime = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime)
-    }
-  }
-
-  const updateDuration = () => {
-    if (audioRef.current) {
-      setDuration(audioRef.current.duration)
-    }
-  }
-
-  const handleTrackEnd = () => {
-    handleNext()
-  }
-
-  const handleAudioError = () => {
-    console.error("Napaka pri nalaganju glasbe")
-    setIsPlaying(false)
-    setIsLoading(false)
-  }
+    return () => clearInterval(interval)
+  }, [isPlaying, duration])
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
-    const secs = Math.floor(seconds % 60)
+    const secs = seconds % 60
     return `${mins}:${secs.toString().padStart(2, "0")}`
   }
 
@@ -240,17 +187,8 @@ export default function MusicPage() {
   }
 
   const handlePrevious = () => {
-    if (currentTime > 3) {
-      // Če smo več kot 3 sekunde v pesmi, ponastavimo trenutno pesem
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0
-        setCurrentTime(0)
-      }
-    } else {
-      // Drugače gremo na prejšnjo pesem
-      setCurrentTrack((prev) => (prev - 1 + tracks.length) % tracks.length)
-      setCurrentTime(0)
-    }
+    setCurrentTrack((prev) => (prev - 1 + tracks.length) % tracks.length)
+    setCurrentTime(0)
   }
 
   const handleTrackSelect = (index: number) => {
@@ -259,45 +197,10 @@ export default function MusicPage() {
     setIsPlaying(true)
   }
 
-  const handleSeek = (time: number) => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = time
-      setCurrentTime(time)
-    }
-  }
-
-  const handleVolumeChange = (newVolume: number) => {
-    setVolume(newVolume / 100)
-  }
-
-  const genres = ["All", "Folk Fusion", "Electronic", "Hip-Hop", "Traditional"]
+  const genres = ["All", "Folk Fusion", "Electronic", "Hip-Hop", "Pop", "Traditional"]
   const filteredTracks = selectedGenre === "All" ? tracks : tracks.filter((track) => track.genre === selectedGenre)
 
   const track = tracks[currentTrack]
-
-  return (
-    <>
-      <Head>
-        <title>NXT Balkan Music | {track.title} - {track.artist}</title>
-        <meta name="description" content="Poslušajte najboljšo balkansko glasbo" />
-      </Head>
-
-      {/* Dodajte header z naslovom */}
-      <header className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-50 border-b border-white/10">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white">NXT Balkan Music</h1>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-300 hidden md:block">
-              Now Playing: {track.title} - {track.artist}
-            </span>
-            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-              <Heart size={16} />
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      const track = tracks[currentTrack]
 
   if (isMobile) {
     return (
@@ -305,9 +208,12 @@ export default function MusicPage() {
         <DynamicBackground currentGenre={track.genre} />
 
         {/* Mobile Header */}
-        <div className="pt-24 px-4 pb-4">
-          <h1 className="text-3xl font-bold text-white">Listen to Our Music</h1>
-        </div>
+      <div className="pt-24 px-4 pb-4">
+    <h1 className="text-3xl font-bold text-white">Listen to Our Music</h1>
+    </div>
+
+
+
 
         {/* Mobile Player Card */}
         <div className="p-4 pt-6">
@@ -321,15 +227,8 @@ export default function MusicPage() {
                 <Button
                   onClick={handlePlayPause}
                   className="w-16 h-16 rounded-full bg-white text-black hover:bg-gray-200 shadow-lg"
-                  disabled={isLoading}
                 >
-                  {isLoading ? (
-                    <div className="w-6 h-6 border-2 border-gray-400 border-t-white rounded-full animate-spin" />
-                  ) : isPlaying ? (
-                    <Pause size={24} />
-                  ) : (
-                    <Play size={24} />
-                  )}
+                  {isPlaying ? <Pause size={24} /> : <Play size={24} />}
                 </Button>
               </div>
             </div>
@@ -353,11 +252,11 @@ export default function MusicPage() {
                 isPlaying={isPlaying}
                 currentTime={currentTime}
                 duration={duration}
-                onSeek={handleSeek}
+                onSeek={(time) => setCurrentTime(time)}
               />
               <div className="flex justify-between text-sm text-gray-300 mt-2">
                 <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration)}</span>
+                <span>{track.duration}</span>
               </div>
             </div>
 
@@ -375,15 +274,8 @@ export default function MusicPage() {
                 <Button
                   onClick={handlePlayPause}
                   className="w-16 h-16 rounded-full bg-white text-black hover:bg-gray-200 shadow-lg"
-                  disabled={isLoading}
                 >
-                  {isLoading ? (
-                    <div className="w-6 h-6 border-2 border-gray-400 border-t-white rounded-full animate-spin" />
-                  ) : isPlaying ? (
-                    <Pause size={28} />
-                  ) : (
-                    <Play size={28} />
-                  )}
+                  {isPlaying ? <Pause size={28} /> : <Play size={28} />}
                 </Button>
 
                 <Button variant="ghost" size="sm" onClick={handleNext} className="text-white hover:bg-white/10 p-3">
@@ -394,19 +286,6 @@ export default function MusicPage() {
               <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white hover:bg-white/10 p-3">
                 <Repeat size={20} />
               </Button>
-            </div>
-
-            {/* Volume Control */}
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <Volume2 size={16} className="text-gray-300" />
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={volume * 100}
-                onChange={(e) => handleVolumeChange(Number(e.target.value))}
-                className="w-full max-w-[200px] h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-              />
             </div>
 
             {/* Action Buttons */}
@@ -547,8 +426,6 @@ export default function MusicPage() {
             if (command.includes("play")) handlePlayPause()
             if (command.includes("next")) handleNext()
             if (command.includes("previous")) handlePrevious()
-            if (command.includes("volume up")) setVolume(prev => Math.min(1, prev + 0.1))
-            if (command.includes("volume down")) setVolume(prev => Math.max(0, prev - 0.1))
           }}
         />
 
@@ -556,15 +433,15 @@ export default function MusicPage() {
           onGesture={(gesture) => {
             if (gesture === "swipe-right") handleNext()
             if (gesture === "swipe-left") handlePrevious()
-            if (gesture === "swipe-up") setVolume(prev => Math.min(1, prev + 0.1))
-            if (gesture === "swipe-down") setVolume(prev => Math.max(0, prev - 0.1))
+            if (gesture === "swipe-up") setVolume(Math.min(100, volume + 10))
+            if (gesture === "swipe-down") setVolume(Math.max(0, volume - 10))
           }}
         />
       </div>
     )
   }
 
-  // Desktop version
+  // Desktop version remains the same
   return (
     <div className="min-h-screen pt-20 animated-bg">
       <DynamicBackground currentGenre={track.genre} />
@@ -596,15 +473,8 @@ export default function MusicPage() {
                     <Button
                       onClick={handlePlayPause}
                       className="w-16 h-16 rounded-full bg-white text-black hover:bg-gray-200"
-                      disabled={isLoading}
                     >
-                      {isLoading ? (
-                        <div className="w-6 h-6 border-2 border-gray-400 border-t-white rounded-full animate-spin" />
-                      ) : isPlaying ? (
-                        <Pause size={24} />
-                      ) : (
-                        <Play size={24} />
-                      )}
+                      {isPlaying ? <Pause size={24} /> : <Play size={24} />}
                     </Button>
                   </div>
                 </div>
@@ -634,11 +504,11 @@ export default function MusicPage() {
                     isPlaying={isPlaying}
                     currentTime={currentTime}
                     duration={duration}
-                    onSeek={handleSeek}
+                    onSeek={(time) => setCurrentTime(time)}
                   />
                   <div className="flex justify-between text-sm text-gray-400">
                     <span>{formatTime(currentTime)}</span>
-                    <span>{formatTime(duration)}</span>
+                    <span>{track.duration}</span>
                   </div>
                 </div>
 
@@ -652,15 +522,8 @@ export default function MusicPage() {
                     <Button
                       onClick={handlePlayPause}
                       className="w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200"
-                      disabled={isLoading}
                     >
-                      {isLoading ? (
-                        <div className="w-6 h-6 border-2 border-gray-400 border-t-white rounded-full animate-spin" />
-                      ) : isPlaying ? (
-                        <Pause size={20} />
-                      ) : (
-                        <Play size={20} />
-                      )}
+                      {isPlaying ? <Pause size={20} /> : <Play size={20} />}
                     </Button>
 
                     <Button variant="ghost" size="sm" onClick={handleNext} className="text-white hover:bg-white/10">
@@ -682,14 +545,9 @@ export default function MusicPage() {
 
                   <div className="flex items-center space-x-2">
                     <Volume2 size={16} className="text-gray-400" />
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={volume * 100}
-                      onChange={(e) => handleVolumeChange(Number(e.target.value))}
-                      className="w-24 bg-gray-800 rounded-full h-1 cursor-pointer"
-                    />
+                    <div className="w-24 bg-gray-800 rounded-full h-1 cursor-pointer">
+                      <div className="bg-white h-1 rounded-full" style={{ width: `${volume}%` }} />
+                    </div>
                   </div>
                 </div>
                 <VoiceControl
@@ -697,8 +555,6 @@ export default function MusicPage() {
                     if (command.includes("play")) handlePlayPause()
                     if (command.includes("next")) handleNext()
                     if (command.includes("previous")) handlePrevious()
-                    if (command.includes("volume up")) setVolume(prev => Math.min(1, prev + 0.1))
-                    if (command.includes("volume down")) setVolume(prev => Math.max(0, prev - 0.1))
                   }}
                 />
 
@@ -706,8 +562,8 @@ export default function MusicPage() {
                   onGesture={(gesture) => {
                     if (gesture === "swipe-right") handleNext()
                     if (gesture === "swipe-left") handlePrevious()
-                    if (gesture === "swipe-up") setVolume(prev => Math.min(1, prev + 0.1))
-                    if (gesture === "swipe-down") setVolume(prev => Math.max(0, prev - 0.1))
+                    if (gesture === "swipe-up") setVolume(Math.min(100, volume + 10))
+                    if (gesture === "swipe-down") setVolume(Math.max(0, volume - 10))
                   }}
                 />
               </div>
@@ -873,9 +729,6 @@ export default function MusicPage() {
           </div>
         </div>
       </section>
-    </div>   
-      {/* Na dnu dodajte audio element za Safari podporo */}
-      <audio ref={audioRef} preload="auto" />
-    </>
+    </div>
   )
-}
+} 
