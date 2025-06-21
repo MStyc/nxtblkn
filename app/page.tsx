@@ -86,13 +86,13 @@ export default function HomePage() {
         <div className="flex flex-col items-center mt-4">
           <p className="text-white text-sm tracking-wide uppercase mb-2">Follow Us</p>
           <div className="flex gap-6">
-            <Link href="https://instagram.com" target="_blank">
+            <Link href="https://www.instagram.com/nxt_balkan/" target="_blank">
               <img src="/icons/ig.png" alt="Instagram" className="w-8 h-8 hover:scale-110 transition-transform" />
             </Link>
-            <Link href="https://tiktok.com" target="_blank">
+            <Link href="https://www.tiktok.com/@stackflow.app?_t=ZN-8xOVqtFhLV8&_r=1" target="_blank">
               <img src="/icons/tt2.png" alt="TikTok" className="w-8 h-8 hover:scale-110 transition-transform" />
             </Link>
-            <Link href="https://youtube.com" target="_blank">
+            <Link href="https://www.youtube.com/@crni_stojke" target="_blank">
               <img src="/icons/yt.png" alt="YouTube" className="w-8 h-8 hover:scale-110 transition-transform" />
             </Link>
           </div>
