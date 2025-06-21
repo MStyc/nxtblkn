@@ -2,43 +2,33 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Megaphone } from "lucide-react"
-import Image from "next/image"
 
 export function AdBanner() {
   return (
-    <section className="relative my-20 rounded-xl overflow-hidden group shadow-xl">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/merch-banner.jpg" // zamenjaj s tvojo sliko
-          alt="Merch Drop"
-          layout="fill"
-          objectFit="cover"
-          className="brightness-[0.4] group-hover:scale-105 transition-transform duration-1000 ease-in-out"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/30 z-10" />
-      </div>
+    <section className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-xl my-20 fade-in">
+      {/* Background Image */}
+      <div
+        className="h-[240px] w-full bg-cover bg-center animate-fade-in"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1542223616-90b42e5a2fba?fit=crop&w=600&h=240&auto=format')",
+        }}
+      />
 
-      {/* Content */}
-      <div className="relative z-20 max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in-up">
-        <div className="flex items-center gap-6 text-white max-w-2xl">
-          <Megaphone size={48} className="text-cyan-400 animate-pulse shrink-0" />
-          <div>
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-2">🔥 Limited Edition Drop</h2>
-            <p className="text-lg text-gray-300">
-              Discover exclusive merch inspired by Balkan beats — available for a short time only.
-            </p>
-          </div>
+      {/* Overlay content */}
+      <div className="absolute inset-0 bg-black/50 flex flex-col sm:flex-row items-center justify-between px-6 py-6">
+        <div className="text-white max-w-xl">
+          <h3 className="text-2xl font-bold mb-1 drop-shadow-lg">🔥 Limited-Time Offer</h3>
+          <p className="text-sm text-gray-200">
+            Discover our exclusive Balkan merch drop — premium quality, bold style, and limited stock!
+          </p>
         </div>
 
         <Button
           asChild
           size="lg"
-          className="bg-white hover:bg-cyan-300 text-black font-bold text-lg rounded-lg px-8 py-4 shadow-lg transition-all duration-300"
+          className="mt-4 sm:mt-0 bg-white text-black hover:bg-gray-200 font-bold shadow-lg transition-all"
         >
-          <Link href="/merch">Shop Now</Link>
+          <Link href="/merch">Explore Now</Link>
         </Button>
       </div>
     </section>
