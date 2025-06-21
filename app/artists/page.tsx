@@ -38,27 +38,6 @@ export default function ArtistsPage() {
       streams: "No Data Yet",
       followers: "3.5K",
     },
-    {
-      name: "Coming Soon",
-      image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-    },
-    {
-      name: "Coming Soon",
-      image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-      
-    },
-    {
-      name: "Coming Soon",
-      image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-    },
-    {
-      name: "Coming Soon",
-      image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-    },
-    {
-      name: "Coming Soon",
-      image: "https://media.discordapp.net/attachments/1329893059147862109/1385960830390112436/39E8BE5C-A08E-44EE-9D0C-4ED06A52D9BA.png?ex=6857f81b&is=6856a69b&hm=ac3d4bfc95166d82985153ce59a08cc2ded3c0cac7fb951d65553f5efc876efd&=&format=webp&quality=lossless",
-    },
   ]
 
   const filteredArtists = selectedGenre === "All" ? artists : artists.filter((artist) => artist.genre === selectedGenre)
@@ -69,7 +48,7 @@ export default function ArtistsPage() {
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16 fade-in opacity-0 translate-y-10 transition-all duration-1000">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">Our Artists</h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">Our Future Artists</h1>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Meet the talented artists who are shaping the future of Balkan music
             </p>
