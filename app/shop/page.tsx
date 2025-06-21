@@ -4,53 +4,40 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
-import { Star, PackageCheck, Shirt } from "lucide-react"
+import { ShoppingCart, Star, PackageCheck, Shirt, X } from "lucide-react"
 
-type Product = {
-  id: number
-  name: string
-  price: string
-  description: string
-  image: string
-  size: string
-  color: string
-}
+const products = [
+  {
+    id: 1,
+    name: "Product Name 1",
+    description: "High quality merchandise designed for fans of Balkan beats and style.",
+    price: "€29.99",
+    image: "/products/product1.webp",
+    info: "Size: M, L, XL\nMaterial: 100% Cotton\nLimited edition print",
+  },
+  {
+    id: 2,
+    name: "Product Name 2",
+    description: "Exclusive design inspired by Balkan culture.",
+    price: "€34.99",
+    image: "/products/product2.webp",
+    info: "Size: S, M, L\nMaterial: Polyester blend\nUnisex style",
+  },
+  {
+    id: 3,
+    name: "Product Name 3",
+    description: "Comfortable and stylish for everyday wear.",
+    price: "€24.99",
+    image: "/products/product3.webp",
+    info: "Size: M, L\nMaterial: Cotton mix\nAvailable in multiple colors",
+  },
+  // Add more products here...
+]
 
 export default function ShopPage() {
-  const [products] = useState<Product[]>([
-    {
-      id: 1,
-      name: "NXT Balkan Hoodie",
-      price: "€39.99",
-      description: "Comfy hoodie with NXT Balkan logo, perfect for chilly nights.",
-      image: "/products/hoodie.webp",
-      size: "S, M, L, XL",
-      color: "Black with holographic print",
-    },
-    {
-      id: 2,
-      name: "Balkan Beats T-Shirt",
-      price: "€24.99",
-      description: "Classic T-shirt featuring Balkan Beats graphic.",
-      image: "/products/tshirt.webp",
-      size: "S, M, L, XL",
-      color: "White or Black",
-    },
-    {
-      id: 3,
-      name: "NXT Balkan Cap",
-      price: "€19.99",
-      description: "Adjustable cap with embroidered logo.",
-      image: "/products/cap.webp",
-      size: "One size fits all",
-      color: "Black",
-    },
-    // dodaj lahko več produktov tukaj
-  ])
-
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [showInfoModal, setShowInfoModal] = useState(false)
-  const [showBuyMenu, setShowBuyMenu] = useState(false)
+  const [showBuyModal, setShowBuyModal] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,28 +57,26 @@ export default function ShopPage() {
     return () => observer.disconnect()
   }, [])
 
-  function openInfo(product: Product) {
+  const openInfoModal = (product) => {
     setSelectedProduct(product)
     setShowInfoModal(true)
-    setShowBuyMenu(false)
   }
 
-  function closeInfo() {
+  const closeInfoModal = () => {
     setShowInfoModal(false)
     setSelectedProduct(null)
-    setShowBuyMenu(false)
   }
 
-  function openBuyMenu() {
-    setShowBuyMenu(true)
+  const openBuyModal = () => {
+    setShowBuyModal(true)
   }
 
-  function closeBuyMenu() {
-    setShowBuyMenu(false)
+  const closeBuyModal = () => {
+    setShowBuyModal(false)
   }
 
   return (
-    <div className="min-h-screen pt-20 animated-bg relative">
+    <div className="min-h-screen pt-20 animated-bg">
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
@@ -111,16 +96,16 @@ export default function ShopPage() {
             {products.map((product, index) => (
               <Card
                 key={product.id}
-                className="fade-in opacity-0 translate-y-10 transition-all duration-1000 glass-effect border-white/20 p-6 hover:neon-glow"
+                className="fade-in opacity-0 translate-y-10 transition-all duration-1000 glass-effect border-white/20 p-6 hover:neon-glow cursor-pointer"
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className="mb-4 rounded-xl overflow-hidden">
+                <div className="mb-4">
                   <Image
                     src={product.image}
                     alt={product.name}
                     width={400}
                     height={400}
-                    className="object-cover w-full h-[300px]"
+                    className="rounded-xl object-cover w-full h-[300px]"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
@@ -128,8 +113,8 @@ export default function ShopPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-white font-semibold text-lg">{product.price}</span>
                   <Button
-                    onClick={() => openInfo(product)}
                     className="bg-white text-black hover:bg-gray-200 rounded-md"
+                    onClick={() => openInfoModal(product)}
                   >
                     Info
                   </Button>
@@ -181,79 +166,76 @@ export default function ShopPage() {
 
       {/* Info Modal */}
       {showInfoModal && selectedProduct && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
-          onClick={closeInfo}
-        >
+        <>
           <div
-            className="bg-gray-900 rounded-lg max-w-lg w-full p-6 relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-2xl font-bold text-white mb-4">{selectedProduct.name}</h3>
-            <Image
-              src={selectedProduct.image}
-              alt={selectedProduct.name}
-              width={400}
-              height={400}
-              className="rounded-lg mb-4 object-cover w-full h-[300px]"
-            />
-            <p className="text-gray-400 mb-2">{selectedProduct.description}</p>
-            <p className="text-gray-400 mb-2">
-              <strong>Size:</strong> {selectedProduct.size}
-            </p>
-            <p className="text-gray-400 mb-6">
-              <strong>Color:</strong> {selectedProduct.color}
-            </p>
-            <div className="flex justify-end gap-4">
-              <Button
-                onClick={openBuyMenu}
-                className="bg-white text-black hover:bg-gray-200 rounded-md"
+            className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-[100]"
+            onClick={closeInfoModal}
+          />
+          <div className="fixed inset-0 flex items-center justify-center z-[110] p-4">
+            <div className="bg-black bg-opacity-50 backdrop-blur-md rounded-xl max-w-lg w-full p-6 relative glass-effect border border-white/20 shadow-lg">
+              <button
+                onClick={closeInfoModal}
+                className="absolute top-4 right-4 text-white hover:text-gray-400"
+                aria-label="Close modal"
               >
+                <X size={24} />
+              </button>
+              <h2 className="text-2xl font-bold mb-4 text-white">{selectedProduct.name}</h2>
+              <p className="text-gray-300 whitespace-pre-line mb-4">{selectedProduct.info}</p>
+              <p className="text-white font-semibold mb-6">{selectedProduct.price}</p>
+              <Button className="bg-white text-black rounded-md" onClick={() => { closeInfoModal(); openBuyModal(); }}>
                 Buy
               </Button>
-              <Button
-                onClick={closeInfo}
-                variant="outline"
-                className="!border-white text-white hover:bg-white hover:text-black rounded-md"
-              >
-                Close
-              </Button>
             </div>
-
-            {/* Buy Menu */}
-            {showBuyMenu && (
-              <div className="mt-6 p-4 bg-gray-800 rounded-lg">
-                <h4 className="text-white mb-4 font-semibold text-lg">Request Purchase via:</h4>
-                <div className="flex flex-col gap-3">
-                  <a
-                    href="https://wa.me/1234567890?text=I'm%20interested%20in%20buying%20the%20product%20NXT%20Balkan"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-green-600 text-white py-2 rounded-md text-center hover:bg-green-700 transition"
-                  >
-                    WhatsApp
-                  </a>
-                  <a
-                    href="https://instagram.com/messages/t/yourprofile"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-pink-600 text-white py-2 rounded-md text-center hover:bg-pink-700 transition"
-                  >
-                    Instagram
-                  </a>
-                  <a
-                    href="mailto:sales@nxtbalkan.com?subject=Purchase%20Request%20NXT%20Balkan%20Product"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-blue-600 text-white py-2 rounded-md text-center hover:bg-blue-700 transition"
-                  >
-                    Email
-                  </a>
-                </div>
-              </div>
-            )}
           </div>
-        </div>
+        </>
+      )}
+
+      {/* Buy Modal */}
+      {showBuyModal && (
+        <>
+          <div
+            className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-[100]"
+            onClick={closeBuyModal}
+          />
+          <div className="fixed inset-0 flex items-center justify-center z-[110] p-4">
+            <div className="bg-black bg-opacity-50 backdrop-blur-md rounded-xl max-w-md w-full p-6 relative glass-effect border border-white/20 shadow-lg text-center">
+              <button
+                onClick={closeBuyModal}
+                className="absolute top-4 right-4 text-white hover:text-gray-400"
+                aria-label="Close modal"
+              >
+                <X size={24} />
+              </button>
+              <h2 className="text-3xl font-bold mb-6 text-white">Request Buy</h2>
+              <p className="text-gray-400 mb-8">Choose your preferred contact method:</p>
+              <div className="flex flex-col gap-4">
+                <a
+                  href="https://wa.me/1234567890"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href="https://instagram.com/nxtbalkan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-lg font-semibold transition"
+                >
+                  Instagram
+                </a>
+                <a
+                  href="mailto:contact@nxtbalkan.com"
+                  className="bg-gray-700 hover:bg-gray-800 text-white py-3 rounded-lg font-semibold transition"
+                >
+                  Email
+                </a>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </div>
   )
