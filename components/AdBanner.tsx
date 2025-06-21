@@ -3,24 +3,40 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Megaphone } from "lucide-react"
+import Image from "next/image"
 
 export function AdBanner() {
   return (
-    <section className="py-12 px-6 mx-auto max-w-4xl fade-in glass-effect border-white/20 rounded-lg shadow-lg hover:neon-glow transition-all duration-300 my-20">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-4 text-white">
-          <Megaphone size={40} className="text-cyan-400 animate-pulse" />
+    <section className="relative my-20 rounded-xl overflow-hidden group shadow-xl">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/merch-banner.jpg" // zamenjaj s tvojo sliko
+          alt="Merch Drop"
+          layout="fill"
+          objectFit="cover"
+          className="brightness-[0.4] group-hover:scale-105 transition-transform duration-1000 ease-in-out"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/30 z-10" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-20 max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in-up">
+        <div className="flex items-center gap-6 text-white max-w-2xl">
+          <Megaphone size={48} className="text-cyan-400 animate-pulse shrink-0" />
           <div>
-            <h3 className="text-2xl font-bold">Exclusive Offer!</h3>
-            <p className="text-gray-400 max-w-md">
-              Check out our latest merch drop — limited quantities available. Don’t miss out!
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-2">🔥 Limited Edition Drop</h2>
+            <p className="text-lg text-gray-300">
+              Discover exclusive merch inspired by Balkan beats — available for a short time only.
             </p>
           </div>
         </div>
+
         <Button
           asChild
           size="lg"
-          className="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold min-w-[160px] rounded-lg shadow-md"
+          className="bg-white hover:bg-cyan-300 text-black font-bold text-lg rounded-lg px-8 py-4 shadow-lg transition-all duration-300"
         >
           <Link href="/merch">Shop Now</Link>
         </Button>
