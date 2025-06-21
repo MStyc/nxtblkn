@@ -32,7 +32,7 @@ const tracks: Track[] = [
     duration: "4:12",
     genre: "Electronic",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "#",
+    audioUrl: "/music/nocni-raj.mp3",
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const tracks: Track[] = [
     duration: "3:28",
     genre: "Hip-Hop",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "#",
+    audioUrl: "/music/nocni-raj.mp3",
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const tracks: Track[] = [
     duration: "3:56",
     genre: "Pop",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "#",
+    audioUrl: "/music/nocni-raj.mp3",
   },
 ]
 
