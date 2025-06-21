@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-export function AdBanner() {
+export function AdBanner2() {
   return (
     <section className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-xl my-20 fade-in">
       {/* Background Image */}
