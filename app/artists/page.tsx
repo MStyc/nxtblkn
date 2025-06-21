@@ -34,7 +34,7 @@ export default function ArtistsPage() {
   const artists = [
     {
       name: "Crni Stojke",
-      image: "https://media.discordapp.net/attachments/1329893059147862109/1384271802003357716/mascote2.png?ex=6857c1d4&is=68567054&hm=b5bc7aba02b164564d6b013ab4e24b2be4966b3dfa8c69d9657d5116e3571388&=&format=webp&quality=lossless&width=590&height=885",
+      image: "https://media.discordapp.net/attachments/1329893059147862109/1385981143601385623/image.jpg?ex=68580b06&is=6856b986&hm=4f7b227f2567bf8ef5b7fd04b1503e0d6742731792a48a70132f3b71c89268b2&=&format=webp&width=498&height=885",
       bio: "Blending traditional Serbian folk with modern electronic elements",
       streams: "No Data Yet",
       followers: "3.5K",
