@@ -9,10 +9,10 @@ import { ShoppingCart, Star, PackageCheck, Shirt, X } from "lucide-react"
 const products = [
   {
     id: 1,
-    name: "Product Name 1",
+    name: "NXT Balkan X Off White T-Shirt",
     description: "High quality merchandise designed for fans of Balkan beats and style.",
-    price: "€29.99",
-    image: "/products/product1.webp",
+    price: "€74.99",
+    image: "https://media.discordapp.net/attachments/1329893059147862109/1385991132089155695/IMG_5551.png?ex=68581454&is=6856c2d4&hm=1ecf9b02af071a4fc9cb52131b246aa7ecdb524947767cd35fdadd012636262d&=&format=webp&quality=lossless&width=819&height=885",
     info: "Size: M, L, XL\nMaterial: 100% Cotton\nLimited edition print",
   },
   {
