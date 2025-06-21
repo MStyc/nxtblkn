@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ArrowRight, Play, Music, Users, Zap, Award, Globe, Headphones } from "lucide-react"
 import { HolographicCard } from "@/components/holographic-card"
 import { MusicPlayer } from "@/components/music-player"
+import { AdBanner } from "@/components/AdBanner"
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null)
@@ -156,6 +157,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Ad Banner Section */}
+      <AdBanner />
 
       {/* Stats Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-gray-900 to-black">
