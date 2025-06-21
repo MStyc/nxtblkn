@@ -30,15 +30,12 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = "unset"
     }
-
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = "unset"
     }
@@ -48,7 +45,7 @@ export function Navigation() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "glass-effect" : "bg-transparent"
+          scrolled ? "bg-black/50 backdrop-blur-md" : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,7 +54,6 @@ export function Navigation() {
               <Image src="/logo.webp" alt="NXT Balkan" width={120} height={40} className="h-8 w-auto" />
             </Link>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <Link
@@ -75,7 +71,6 @@ export function Navigation() {
               ))}
             </div>
 
-            {/* Mobile menu button */}
             <Button
               variant="ghost"
               size="sm"
@@ -104,20 +99,17 @@ export function Navigation() {
         </div>
       </nav>
 
-      {/* Full Screen Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 z-[55] md:hidden transition-all duration-500 ease-in-out ${
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
-        {/* Background with animated gradient */}
         <div
           className={`absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black transition-all duration-700 ${
             isOpen ? "scale-100" : "scale-110"
           }`}
         />
 
-        {/* Animated particles background */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(20)].map((_, i) => (
             <div
@@ -135,9 +127,7 @@ export function Navigation() {
           ))}
         </div>
 
-        {/* Menu Content */}
         <div className="relative h-full flex flex-col justify-center items-center px-8">
-          {/* Logo */}
           <div
             className={`mb-16 transition-all duration-700 delay-200 ${
               isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
@@ -152,7 +142,6 @@ export function Navigation() {
             />
           </div>
 
-          {/* Navigation Items */}
           <div className="space-y-8 text-center">
             {navItems.map((item, index) => (
               <div
@@ -173,10 +162,7 @@ export function Navigation() {
                 >
                   <span className="relative z-10">{item.label}</span>
 
-                  {/* Animated underline */}
                   <span className="absolute -bottom-2 left-1/2 w-0 h-1 bg-gradient-to-r from-white to-gray-300 transition-all duration-300 group-hover:w-full group-hover:left-0 rounded-full" />
-
-                  {/* Glow effect for active item */}
                   {pathname === item.href && (
                     <span className="absolute inset-0 bg-white opacity-10 blur-xl rounded-lg animate-pulse" />
                   )}
@@ -185,7 +171,6 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Bottom decoration */}
           <div
             className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 transition-all duration-700 delay-1000 ${
               isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -195,7 +180,6 @@ export function Navigation() {
           </div>
         </div>
 
-        {/* Close button hint */}
         <div
           className={`absolute top-6 right-6 text-gray-400 text-sm transition-all duration-700 delay-500 ${
             isOpen ? "opacity-100" : "opacity-0"
