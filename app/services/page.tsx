@@ -120,6 +120,80 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section className="py-20 px-4 bg-black">
+        <div className="container mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-12">Our Pricing</h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-16">
+            Choose the plan that fits your needs — from simple promotion to full artist management.
+          </p>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[ 
+              {
+                title: "Starter",
+                price: "€49",
+                features: [
+                  "1 song promotion (Instagram, TikTok, Shorts)",
+                  "Basic teaser with visuals",
+                  "3 days of visibility",
+                  "Essential reach insights",
+                ],
+              },
+              {
+                title: "Boost",
+                price: "€129",
+                features: [
+                  "3 content posts + YouTube inclusion",
+                  "High-quality graphics & smart bio",
+                  "7 days campaign visibility",
+                  "Reach and engagement analytics",
+                ],
+              },
+              {
+                title: "Premium Artist",
+                price: "€299",
+                features: [
+                  "Custom artist video or interview",
+                  "10+ campaign posts (reels + stories)",
+                  "Ad targeting for IG & TikTok",
+                  "Visual & content consultation",
+                ],
+              },
+              {
+                title: "Full Management",
+                price: "from €499",
+                features: [
+                  "All Premium features included",
+                  "Music distribution to all platforms",
+                  "Strategic career planning",
+                  "Legal, branding & media support",
+                ],
+              },
+            ].map((pkg, i) => (
+              <Card
+                key={i}
+                className="glass-effect border-white/20 p-6 hover:neon-glow text-left transition-all duration-300"
+              >
+                <h3 className="text-2xl font-bold text-white mb-2">{pkg.title}</h3>
+                <p className="text-3xl text-white font-bold mb-4">{pkg.price}</p>
+                <ul className="space-y-2 text-gray-300 text-sm">
+                  {pkg.features.map((f, j) => (
+                    <li key={j}>• {f}</li>
+                  ))}
+                </ul>
+                <Button
+                  asChild
+                  className="w-full mt-6 bg-white text-black hover:bg-gray-200 transition-colors"
+                >
+                  <Link href="/contact">Get Started</Link>
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Process Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-black to-gray-900">
         <div className="container mx-auto">
