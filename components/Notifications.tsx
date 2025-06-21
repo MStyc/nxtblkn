@@ -12,37 +12,35 @@ const notifications = [
 ]
 
 export function Notifications() {
-  const [current, setCurrent] = useState(0)
-  const [visible, setVisible] = useState(false)
+  const [currentNotification, setCurrentNotification] = useState(0)
+  const [showNotification, setShowNotification] = useState(false)
 
   useEffect(() => {
-    const showNotification = () => {
-      setVisible(true)
-      setTimeout(() => setVisible(false), 10000) // prikaži 10 sekund
-    }
-
-    showNotification()
-
     const interval = setInterval(() => {
-      setCurrent((c) => (c + 1) % notifications.length)
-      showNotification()
-    }, 45000)
+      setCurrentNotification((prev) => (prev + 1) % notifications.length)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 8000) // prikaži 8 sekund
+    }, 40000) // vsakih 40 sekund nova notifikacija
 
     return () => clearInterval(interval)
   }, [])
 
+  if (!showNotification) return null
+
   return (
     <div
-      className={`fixed bottom-6 right-6 z-50 max-w-xs w-[90vw] sm:w-80 bg-gradient-to-r from-purple-700 via-indigo-700 to-blue-700 
-      rounded-xl shadow-xl text-white font-semibold flex items-center gap-3 px-5 py-3
-      transition-opacity duration-500 ease-in-out
-      ${visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-      role="alert"
       aria-live="polite"
-      aria-atomic="true"
+      className="fixed bottom-6 left-6 z-[9999] max-w-xs sm:max-w-sm w-full
+                 bg-white/95 backdrop-blur-md border border-gray-300 rounded-xl
+                 shadow-lg flex items-center gap-3 px-5 py-3
+                 animate-slideInLeft
+                 dark:bg-gray-900 dark:border-gray-700"
+      style={{ animationDuration: "0.5s" }}
     >
-      <Bell className="w-6 h-6 flex-shrink-0" />
-      <p className="text-sm sm:text-base">{notifications[current]}</p>
+      <Bell className="text-gray-800 dark:text-gray-200 w-6 h-6 flex-shrink-0" />
+      <p className="text-gray-900 dark:text-gray-100 text-sm sm:text-base font-medium">
+        {notifications[currentNotification]}
+      </p>
     </div>
   )
 }
