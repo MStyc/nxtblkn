@@ -147,19 +147,22 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                name: "Aleksandar Petrović",
+                name: "M. Stojanović (Crni Stojke)",
                 role: "Founder & CEO",
-                bio: "Music industry veteran with 15+ years of experience in artist management and music production.",
+                bio: "Music industry veteran with 1 year of experience in artist management and music production.",
+                image: "https://media.discordapp.net/attachments/1329893059147862109/1385981143601385623/image.jpg?ex=68580b06&is=6856b986&hm=4f7b227f2567bf8ef5b7fd04b1503e0d6742731792a48a70132f3b71c89268b2&=&format=webp&width=498&height=885",
               },
               {
-                name: "Milica Stojanović",
-                role: "Head of A&R",
+                name: "K. Kruljac",
+                role: "CEO",
                 bio: "Former recording artist turned talent scout, discovering the next generation of Balkan music stars.",
+                image: "https://media.discordapp.net/attachments/1329893059147862109/1385981578987180123/A9FBD321-D568-43E0-9F30-7BCB18DC45FA.jpg?ex=68580b6e&is=6856b9ee&hm=741b0b6b5cbf5b1b3c1c22f71dd94bea0722d28857642206770ce4cc3fa4c0e8&=&format=webp&width=498&height=885",
               },
               {
-                name: "Stefan Nikolić",
-                role: "Creative Director",
+                name: "Rubens K.",
+                role: "Co-Ceo",
                 bio: "Award-winning producer and sound engineer specializing in modern Balkan music production.",
+                image: "",
               },
             ].map((member, index) => (
               <Card
