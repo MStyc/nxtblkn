@@ -42,45 +42,64 @@ export default function HomePage() {
 
   return (
     <div className="animated-bg min-h-screen">
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+     {/* Hero Section */}
+<section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
 
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="fade-in">
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-float text-white">
-              NXT <span className="text-gray-300">BALKAN</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
-              Revolutionary music agency specializing in Balkan music production, artist management, and promotion
-            </p>
+  <div className="container mx-auto px-4 text-center relative z-10">
+    <div className="fade-in">
+      <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-float text-white">
+        NXT <span className="text-gray-300">BALKAN</span>
+      </h1>
+      <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
+        Revolutionary music agency specializing in Balkan music production, artist management, and promotion
+      </p>
 
-            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-black hover:bg-gray-200 min-w-[220px] !border-4 !border-white !rounded-lg shadow-lg"
-              >
-                <Link href="/artists">
-                  Discover Music
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-                </Link>
-              </Button>
+      <div className="flex flex-col gap-6 items-center">
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-white text-black hover:bg-gray-200 min-w-[220px] !border-4 !border-white !rounded-lg shadow-lg"
+          >
+            <Link href="/artists">
+              Discover Music
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+            </Link>
+          </Button>
 
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="!border-4 !border-white text-white hover:bg-white hover:text-black min-w-[220px] !rounded-lg shadow-lg"
-              >
-                <Link href="/join">
-                  Submit Demo
-                  <Play className="ml-2 group-hover:scale-110 transition-transform" size={20} />
-                </Link>
-              </Button>
-            </div>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="!border-4 !border-white text-white hover:bg-white hover:text-black min-w-[220px] !rounded-lg shadow-lg"
+          >
+            <Link href="/join">
+              Submit Demo
+              <Play className="ml-2 group-hover:scale-110 transition-transform" size={20} />
+            </Link>
+          </Button>
+        </div>
+
+        {/* Social Icons */}
+        <div className="flex flex-col items-center mt-4">
+          <p className="text-white text-sm tracking-wide uppercase mb-2">Follow Us</p>
+          <div className="flex gap-6">
+            <Link href="https://instagram.com" target="_blank">
+              <img src="/icons/ig.png" alt="Instagram" className="w-8 h-8 hover:scale-110 transition-transform" />
+            </Link>
+            <Link href="https://tiktok.com" target="_blank">
+              <img src="/icons/tt.png" alt="TikTok" className="w-8 h-8 hover:scale-110 transition-transform" />
+            </Link>
+            <Link href="https://youtube.com" target="_blank">
+              <img src="/icons/yt.png" alt="YouTube" className="w-8 h-8 hover:scale-110 transition-transform" />
+            </Link>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
         {/* Floating Elements */}
         <div
