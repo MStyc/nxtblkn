@@ -170,8 +170,18 @@ export default function AboutPage() {
                 className="fade-in opacity-0 translate-y-10 transition-all duration-1000 glass-effect border-white/20 p-6 hover:neon-glow"
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
-                <div className="aspect-square bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                  <Users size={48} className="text-gray-400" />
+                <div className="aspect-square rounded-lg mb-4 overflow-hidden border border-white/10">
+                  {member.image ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-800">
+                      <Users size={48} className="text-gray-400" />
+                    </div>
+                  )}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{member.name}</h3>
                 <p className="text-gray-400 mb-3">{member.role}</p>
