@@ -208,9 +208,10 @@ export default function MusicPage() {
         <DynamicBackground currentGenre={track.genre} />
 
         {/* Mobile Header */}
-      <div className="pt-24 px-4 pb-4">
-         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">Listen to Our Music</h1>
-    </div>
+      <section className="py-20 px-4 bg-gradient-to-r from-black to-gray-900">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16 fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Featured Playlists</h2>
 
 
 
