@@ -46,7 +46,7 @@ const tracks: Track[] = [
     genre: "Folk Fusion",
     releaseDate: "2024-01-15",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/nocni-raj.mp3",
+    audioUrl: "/music/Noćni Rajj.mp3",
     plays: "2.5M",
     likes: "45K",
   },
@@ -59,7 +59,7 @@ const tracks: Track[] = [
     genre: "Folk Fusion",
     releaseDate: "2024-01-10",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/nocni-raj.mp3",
+    audioUrl: "#",
     plays: "1.8M",
     likes: "32K",
   },
@@ -72,7 +72,7 @@ const tracks: Track[] = [
     genre: "Electronic",
     releaseDate: "2024-01-05",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/nocni-raj.mp3",
+    audioUrl: "#",
     plays: "3.2M",
     likes: "67K",
   },
@@ -85,7 +85,7 @@ const tracks: Track[] = [
     genre: "Hip-Hop",
     releaseDate: "2023-12-20",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/nocni-raj.mp3",
+    audioUrl: "#",
     plays: "4.1M",
     likes: "89K",
   },
@@ -98,7 +98,7 @@ const tracks: Track[] = [
     genre: "Traditional",
     releaseDate: "2023-12-15",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/nocni-raj.mp3",
+    audioUrl: "#",
     plays: "1.2M",
     likes: "28K",
   },
@@ -111,7 +111,7 @@ const tracks: Track[] = [
     genre: "Folk Fusion",
     releaseDate: "2023-12-10",
     coverUrl: "/placeholder.svg?height=300&width=300",
-    audioUrl: "/music/nocni-raj.mp3",
+    audioUrl: "#",
     plays: "2.9M",
     likes: "54K",
   },
@@ -208,13 +208,9 @@ export default function MusicPage() {
         <DynamicBackground currentGenre={track.genre} />
 
         {/* Mobile Header */}
-      <section className="py-20 px-4 bg-gradient-to-r from-black to-gray-900">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Featured Playlists</h2>
-
-
-
+        <div className="sticky top-16 bg-black/90 backdrop-blur-lg border-b border-white/10 px-4 py-4 z-10">
+          <h1 className="text-xl font-bold text-white">Your Music</h1>
+        </div>
 
         {/* Mobile Player Card */}
         <div className="p-4 pt-6">
@@ -732,4 +728,4 @@ export default function MusicPage() {
       </section>
     </div>
   )
-} 
+}
