@@ -12,7 +12,6 @@ const navItems = [
   { href: "/services", label: "Services" },
   { href: "/artists", label: "Artists" },
   { href: "/music", label: "Music" },
-  { href: "/news", label: "News" },
   { href: "/shop", label: "Shop" },
   { href: "/contact", label: "Contact" },
   { href: "/join", label: "Join Us" },
