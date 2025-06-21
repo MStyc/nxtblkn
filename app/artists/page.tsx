@@ -27,7 +27,8 @@ export default function ArtistsPage() {
     return () => observer.disconnect()
   }, [])
 
-  
+  const genres = ["All", "Folk Fusion", "Electronic", "Hip-Hop", "Pop", "Traditional"]
+
 
   const artists = [
     {
