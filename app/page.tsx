@@ -90,7 +90,7 @@ export default function HomePage() {
               <img src="/icons/ig.png" alt="Instagram" className="w-8 h-8 hover:scale-110 transition-transform" />
             </Link>
             <Link href="https://tiktok.com" target="_blank">
-              <img src="/icons/tt.png" alt="TikTok" className="w-8 h-8 hover:scale-110 transition-transform" />
+              <img src="/icons/tt2.png" alt="TikTok" className="w-8 h-8 hover:scale-110 transition-transform" />
             </Link>
             <Link href="https://youtube.com" target="_blank">
               <img src="/icons/yt.png" alt="YouTube" className="w-8 h-8 hover:scale-110 transition-transform" />
