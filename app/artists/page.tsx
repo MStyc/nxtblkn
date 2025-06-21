@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Play, ExternalLink, Instagram, Youtube } from "lucide-react"
 import Image from "next/image"
 import { AdBanner } from "@/components/AdBanner"
+import { AdBanner2 } from "@/components/AdBanner2"
 
 export default function ArtistsPage() {
   const [selectedGenre, setSelectedGenre] = useState("All")
@@ -137,7 +138,7 @@ export default function ArtistsPage() {
           </div>
         </div>
       </section>
-      <AdBanner />
+      <AdBanner2 />
       {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-black to-gray-900">
         <div className="container mx-auto text-center">
