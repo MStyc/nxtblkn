@@ -155,3 +155,22 @@
 .animate-border-flow {
   animation: border-flow 2s ease-in-out infinite;
 }
+
+/* --- Notification slide-in animation --- */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideInLeft {
+  animation-name: slideInLeft;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-duration: 0.5s;
+}
