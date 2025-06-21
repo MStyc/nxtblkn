@@ -9,6 +9,7 @@ import { ScrollProgress } from "@/components/scroll-progress"
 import { SmoothPageTransition } from "@/components/smooth-page-transition"
 import { ParticleSystem } from "@/components/particle-system"
 import { FloatingElements } from "@/components/floating-elements"
+import { Notifications } from "@/components/Notifications"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         <AnimatedCursor />
         <ParticleSystem />
         <FloatingElements />
+         <Notifications />
       </body>
     </html>
   )
