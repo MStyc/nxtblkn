@@ -10,7 +10,7 @@ export function AdBanner() {
       <div
         className="h-[240px] w-full bg-cover bg-center animate-fade-in"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1542223616-90b42e5a2fba?fit=crop&w=600&h=240&auto=format')",
+          backgroundImage: "url('https://media.discordapp.net/attachments/1329893059147862109/1386021359498559649/standard.gif?ex=6858307b&is=6856defb&hm=1ac2b92df68cef4e29d1e2293ac3e574b8600dc3935d71b3c10cf1efed8997ab&=')",
         }}
       />
 
